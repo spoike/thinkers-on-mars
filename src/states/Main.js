@@ -53,7 +53,8 @@ export default class Main extends Phaser.State {
       x: this.game.world.centerX-100,
       y: this.game.world.centerY-100,
       key: 'temp_sprites',
-      frame: 'enemy'
+      frame: 'enemy',
+      players: [this.player1, this.player2]
     });
 
 
