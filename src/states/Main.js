@@ -93,6 +93,8 @@ export default class Main extends Phaser.State {
    */
   
   update() {
+    game.physics.arcade.collide(this.player1, this.player2);
+
     // Disabled camera for now
     /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
     var centerY = (this.player1.y + this.player2.y) / 2 ;

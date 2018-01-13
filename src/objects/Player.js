@@ -19,7 +19,7 @@ export default class Player extends Phaser.Sprite {
     this.enableBody = true;
     this.body.collideWorldBounds = true;
     //this.body.bounce.set(0.8);
-    this.body.immovable = true;
+    //this.body.immovable = true;
     //this.body.allowRotation = true;
 
     this.initKeys();
