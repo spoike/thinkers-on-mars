@@ -1,0 +1,19 @@
+{
+  "name": "thinkers-on-mars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spoike/thinkers-on-mars.git"
+  },
+  "author": "Mikael Brassman <mishakun@gmail.com> (https://twitter.com/spoike)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spoike/thinkers-on-mars/issues"
+  },
+  "homepage": "https://github.com/spoike/thinkers-on-mars#readme"
+}
