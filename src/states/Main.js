@@ -1,6 +1,9 @@
 import throttle from 'lodash.throttle';
 import Player from '../objects/Player';
 
+const PLAYER1 = 0;
+const PLAYER2 = 1;
+
 /**
  * Setup and display the main game state.
  */
@@ -16,8 +19,18 @@ export default class Main extends Phaser.State {
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg');
 
     // Add a player to the game.
-    this.player = new Player({
+    this.player1 = new Player({
       game: this.game,
+      pIndex: PLAYER1,
+      x: this.game.world.centerX + 64,
+      y: this.game.world.centerY,
+      key: 'textures',
+      frame: 'ship',
+    });
+
+    this.player2 = new Player({
+      game: this.game,
+      pIndex: PLAYER2,
       x: this.game.world.centerX,
       y: this.game.world.centerY,
       key: 'textures',
@@ -25,6 +38,8 @@ export default class Main extends Phaser.State {
     });
 
     this.cursor = this.game.input.keyboard.createCursorKeys();
+    this.speed = 10;
+
     // ...
 
     // Setup listener for window resize.
@@ -44,21 +59,9 @@ export default class Main extends Phaser.State {
   /**
    * Handle actions in the main game loop.
    */
+  
   update() {
-    const cursor = this.cursor;
-
-    if (cursor.left.isDown) {
-      this.player.x -= 10;
-    }
-    if (cursor.right.isDown) {
-      this.player.x += 10;
-    }
-    if (cursor.up.isDown) {
-      this.player.y -= 10;
-    }
-    if (cursor.down.isDown) {
-      this.player.y += 10;
-    }
+   
 
   }
 }
