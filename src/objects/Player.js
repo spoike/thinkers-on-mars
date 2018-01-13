@@ -15,6 +15,14 @@ export default class Player extends Phaser.Sprite {
     this.game.add.existing(this);
     this.anchor.setTo(0.5);
     
+    // Physics body
+    this.game.physics.arcade.enable(this.tankBase);
+    this.enableBody = true;
+    this.body.collideWorldBounds = true;
+    this.body.bounce.set(0.8);
+    this.body.allowRotation = true;
+    this.body.immovable = true
+
     this.initKeys();
   }
 
