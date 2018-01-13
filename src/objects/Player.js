@@ -26,10 +26,10 @@ export default class Player extends Phaser.Sprite {
     //this.body.allowRotation = true;
 
     this.initKeys();
-    this.initAnimations(game);
+    this.initAnimations();
   }
 
-  initAnimations(game) {
+  initAnimations() {
     this.animations.add('idle_front', [0, 1, 2, 3, 4], 15);
     this.animations.add('idle_back', [5, 6, 7, 8], 15);
     this.animations.add('run_front', [9, 10, 11], 15);
