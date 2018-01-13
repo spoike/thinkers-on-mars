@@ -13,7 +13,7 @@ export default class Main extends Phaser.State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Add background tile.
-    this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg');
+    this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
 
     // Add a player to the game.
     this.player = new Player({
