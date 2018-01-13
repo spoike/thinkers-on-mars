@@ -8,7 +8,12 @@ export default class Zombie extends Phaser.Sprite {
 
     // Add the sprite to the game.
     this.game.add.existing(this);
-    this.anchor.setTo(0.5);
+	this.anchor.setTo(0.5);
+	
+	 // Physics body
+	 this.game.physics.arcade.enable(this);
+	 this.enableBody = true;
+	 this.body.immovable = false;
 
     // Player reference
     this.players = players;
@@ -39,11 +44,13 @@ export default class Zombie extends Phaser.Sprite {
   		distance = distance_player2;
   	}
 
-  	let followVec = Phaser.Point.subtract(follow_player.position, this.position).normalize();
+  	let followVec = new Phaser.Point(follow_player.position.x - this.position.x, follow_player.position.y - this.position.y).normalize();// Phaser.Point.subtract(follow_player.position, this.position).normalize();
 
-  	if (distance > 32) {
-	  	this.x += followVec.x;
-	  	this.y += followVec.y;	
+  	if (distance > 32) {	
+		  var speed = 90;
+		  this.body.velocity.x = followVec.x * speed;
+		  this.body.velocity.y = followVec.y * speed;
+
   	}
   }
 }

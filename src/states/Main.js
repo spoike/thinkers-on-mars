@@ -22,6 +22,7 @@ export default class Main extends Phaser.State {
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
 
+    this.playerGroup = game.add.group();
     // Add a player to the game.
     this.player1 = new Player({
       game: this.game,
@@ -31,6 +32,7 @@ export default class Main extends Phaser.State {
       key: 'temp_sprites',
       frame: 'player',
     });
+    this.playerGroup.add(this.player1);
 
     this.player2 = new Player({
       game: this.game,
@@ -40,6 +42,9 @@ export default class Main extends Phaser.State {
       key: 'temp_sprites',
       frame: 'player',
     });
+
+    this.playerGroup.add(this.player2);
+    
 
   
     this.cursor = this.game.input.keyboard.createCursorKeys();
@@ -57,17 +62,20 @@ export default class Main extends Phaser.State {
       players: [this.player1, this.player2]
     });
     
+    this.zombieGroup = this.game.add.group();
     this.zombies = [];
     for (let i = 0; i < 10; i++) {
       let spawn = this.getEnemySpawnPoint();
-      this.zombies.push(new Zombie({
+      var zombie = new Zombie({
         game: this.game,
         x: this.game.world.centerX+spawn.x,
         y: this.game.world.centerY+spawn.y,
         key: 'temp_sprites',
         frame: 'enemy',
         players: [this.player1, this.player2]
-      }))
+      });
+      this.zombies.push(zombie);
+      this.zombieGroup.add(zombie);
     }
 
     // Setup listener for window resize.
@@ -93,7 +101,12 @@ export default class Main extends Phaser.State {
    */
   
   update() {
-    game.physics.arcade.collide(this.player1, this.player2);
+    //game.physics.arcade.collide(this.player1, this.player2);
+    game.physics.arcade.collide(this.playerGroup);
+
+    //game.physics.arcade.collide(this.zombieGroup,  this.playerGroup);
+
+    game.physics.arcade.collide(this.zombieGroup);
 
     // Disabled camera for now
     /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
