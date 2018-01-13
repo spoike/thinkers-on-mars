@@ -56,10 +56,26 @@ export default class Main extends Phaser.State {
       frame: 'enemy',
       players: [this.player1, this.player2]
     });
-
+    
+    this.zombies = [];
+    for (let i = 0; i < 10; i++) {
+      let spawn = this.getEnemySpawnPoint();
+      this.zombies.push(new Zombie({
+        game: this.game,
+        x: this.game.world.centerX+spawn.x,
+        y: this.game.world.centerY+spawn.y,
+        key: 'temp_sprites',
+        frame: 'enemy',
+        players: [this.player1, this.player2]
+      }))
+    }
 
     // Setup listener for window resize.
     window.addEventListener('resize', throttle(this.resize.bind(this), 50), false);
+  }
+
+  getEnemySpawnPoint() {
+    return new Phaser.Point(Phaser.Math.random(-100, 100), Phaser.Math.random(-100, 100));
   }
 
   /**
