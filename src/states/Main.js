@@ -24,8 +24,8 @@ export default class Main extends Phaser.State {
       pIndex: PLAYER1,
       x: this.game.world.centerX + 64,
       y: this.game.world.centerY,
-      key: 'textures',
-      frame: 'ship',
+      key: 'temp_sprites',
+      frame: 'player',
     });
 
     this.player2 = new Player({
