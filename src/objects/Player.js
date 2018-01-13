@@ -15,7 +15,7 @@ export default class Player extends Phaser.Sprite {
     this.anchor.setTo(0.5);
     
     // Physics body
-    this.game.physics.arcade.enable(this.tankBase);
+    this.game.physics.arcade.enable(this);
     this.enableBody = true;
     this.body.collideWorldBounds = true;
     this.body.bounce.set(0.8);
