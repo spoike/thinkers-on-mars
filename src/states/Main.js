@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle';
 import Player from '../objects/Player';
 import Zombie from '../objects/Zombie';
+import Trapdoor from '../objects/Trapdoor';
 
 const PLAYER1 = 0;
 const PLAYER2 = 1;
@@ -22,7 +23,15 @@ export default class Main extends Phaser.State {
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
 
-    this.playerGroup = game.add.group();
+    this.backgroundGroup = this.game.add.group();
+    this.trapdoor = new Trapdoor({
+      game: this.game, 
+      x: this.game.world.centerX, 
+      y: this.game.world.centerY
+    });
+    this.backgroundGroup.add(this.trapdoor);
+
+    this.playerGroup = this.game.add.group();
     // Add a player to the game.
     this.player1 = new Player({
       game: this.game,
