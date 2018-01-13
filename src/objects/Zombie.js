@@ -2,8 +2,8 @@
  * Setup and control base player.
  */
 export default class Zombie extends Phaser.Sprite {
-  constructor({game, x, y, key, frame, players}) {
-    super(game, x, y, key, frame);
+  constructor({game, x, y, players}) {
+    super(game, x, y, 'zombie', 0);
 
     // Add the sprite to the game.
     this.game.add.existing(this);
@@ -18,6 +18,11 @@ export default class Zombie extends Phaser.Sprite {
     this.players = players;
     // damage
     this.doNothing = 0;
+    // Player reference
+    this.initAnimations();
+
+    this.scale.x = 2.0;
+    this.scale.y = 2.0;
   }
 
   update() {
@@ -63,5 +68,21 @@ export default class Zombie extends Phaser.Sprite {
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
   	}
+    this.anchor.setTo(0.5);
+
+    // Physics body
+    this.game.physics.arcade.enable(this);
+    this.enableBody = true;
+    this.body.immovable = false;
+
+
+
+    this.animations.play(followVec.y <= 0 ? 'walk_front' : 'walk_back');
+    this.scale.x = followVec.x > 0 ? -2.0 : 2.0 ;
+  }
+
+  initAnimations() {
+    this.animations.add('walk_front', [0, 1, 2, 3, 4, 5, 6], 15);
+    this.animations.add('walk_back', [7, 8, 9, 10, 11], 15);
   }
 }

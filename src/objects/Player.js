@@ -28,14 +28,14 @@ export default class Player extends Phaser.Sprite {
     this.health = 100;
 
     this.initKeys();
-    this.initAnimations(game);
+    this.initAnimations();
   }
 
   isDead() {
   	return this.health <= 0;
   }
 
-  initAnimations(game) {
+  initAnimations() {
     this.animations.add('idle_front', [0, 1, 2, 3, 4], 15);
     this.animations.add('idle_back', [5, 6, 7, 8], 15);
     this.animations.add('run_front', [9, 10, 11], 15);
