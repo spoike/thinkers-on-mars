@@ -16,6 +16,9 @@ export default class Main extends Phaser.State {
     // Enable arcade physics.
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
+    this.scale.setGameSize(1280, 720);
+    //game.world.setBounds(-100, -100);
+    
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
 
@@ -38,6 +41,7 @@ export default class Main extends Phaser.State {
       frame: 'player',
     });
 
+  
     this.cursor = this.game.input.keyboard.createCursorKeys();
     //this.speed = 10;
 
@@ -52,6 +56,7 @@ export default class Main extends Phaser.State {
       frame: 'enemy'
     });
 
+
     // Setup listener for window resize.
     window.addEventListener('resize', throttle(this.resize.bind(this), 50), false);
   }
@@ -60,10 +65,10 @@ export default class Main extends Phaser.State {
    * Resize the game to fit the window.
    */
   resize() {
-    const width = window.innerWidth * window.devicePixelRatio;
+    /* const width = window.innerWidth * window.devicePixelRatio;
     const height = window.innerHeight * window.devicePixelRatio;
 
-    this.scale.setGameSize(width, height);
+    this.scale.setGameSize(width, height); */
   }
 
   /**
@@ -71,7 +76,15 @@ export default class Main extends Phaser.State {
    */
   
   update() {
-   
+    // Disabled camera for now
+    /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
+    var centerY = (this.player1.y + this.player2.y) / 2 ;
+    game.camera.focusOnXY(centerX, centerY);
 
+    var deltaDist = this.player1.position.distance(this.player2.position);
+    var zoom = 1 - deltaDist / 5000; */
+   // game.camera.scale.x = zoom;
+    // game.camera.scale.y = zoom;
+    
   }
 }
