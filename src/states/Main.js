@@ -24,6 +24,7 @@ export default class Main extends Phaser.State {
       frame: 'ship',
     });
 
+    this.cursor = this.game.input.keyboard.createCursorKeys();
     // ...
 
     // Setup listener for window resize.
@@ -44,6 +45,20 @@ export default class Main extends Phaser.State {
    * Handle actions in the main game loop.
    */
   update() {
-    
+    const cursor = this.cursor;
+
+    if (cursor.left.isDown) {
+      this.player.x -= 10;
+    }
+    if (cursor.right.isDown) {
+      this.player.x += 10;
+    }
+    if (cursor.up.isDown) {
+      this.player.y -= 10;
+    }
+    if (cursor.down.isDown) {
+      this.player.y += 10;
+    }
+
   }
 }
