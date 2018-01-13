@@ -25,8 +25,14 @@ export default class Player extends Phaser.Sprite {
     //this.body.immovable = true;
     //this.body.allowRotation = true;
 
+    this.health = 100;
+
     this.initKeys();
     this.initAnimations(game);
+  }
+
+  isDead() {
+  	return this.health <= 0;
   }
 
   initAnimations(game) {
@@ -47,6 +53,10 @@ export default class Player extends Phaser.Sprite {
     } else {
       this.keys = game.input.keyboard.createCursorKeys();
     }
+  }
+
+  takeDamage(damage) {
+  	this.health -= damage;
   }
 
   update() {

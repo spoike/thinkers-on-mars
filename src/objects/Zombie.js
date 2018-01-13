@@ -9,27 +9,35 @@ export default class Zombie extends Phaser.Sprite {
     this.game.add.existing(this);
 	this.anchor.setTo(0.5);
 	
-	 // Physics body
-	 this.game.physics.arcade.enable(this);
-	 this.enableBody = true;
-	 this.body.immovable = false;
+	// Physics body
+	this.game.physics.arcade.enable(this);
+	this.enableBody = true;
+	this.body.immovable = false;
 
     // Player reference
     this.players = players;
+    // damage
+    this.doNothing = 0;
   }
 
   update() {
+  	let deltaTime = this.game.time.physicsElapsed;
+  	if (this.doNothing > 0) {
+  		this.doNothing -= deltaTime;
+  		return;
+  	}
+
   	// Closets enemy
   	let distance_player1 = this.players[0].position.distance(this.position);
   	let distance_player2 = this.players[1].position.distance(this.position);
   	let follow_player = undefined;
   	let distance = undefined;
 
-  	if (this.players[0] === undefined) {
+  	if (this.players[0] === undefined || this.players[0].isDead()) {
   		follow_player = this.players[1];
   		distance = distance_player2;
   	}
-  	else if (this.players[1] === undefined) {
+  	else if (this.players[1] === undefined || this.players[1].isDead()) {
   		follow_player = this.players[0];
   		distance = distance_player1;
   	}
@@ -46,10 +54,14 @@ export default class Zombie extends Phaser.Sprite {
   	let followVec = new Phaser.Point(follow_player.position.x - this.position.x, follow_player.position.y - this.position.y).normalize();// Phaser.Point.subtract(follow_player.position, this.position).normalize();
 
   	if (distance > 32) {	
-		  var speed = 90;
-		  this.body.velocity.x = followVec.x * speed;
-		  this.body.velocity.y = followVec.y * speed;
-
+		var speed = 90;
+		this.body.velocity.x = followVec.x * speed;
+		this.body.velocity.y = followVec.y * speed;
+  	} else {
+  		follow_player.takeDamage(10);
+		this.doNothing = 5;
+		this.body.velocity.x = 0;
+		this.body.velocity.y = 0;
   	}
   }
 }

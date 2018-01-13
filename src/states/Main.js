@@ -96,7 +96,6 @@ export default class Main extends Phaser.State {
     //game.physics.arcade.collide(this.zombieGroup,  this.playerGroup);
     game.physics.arcade.collide(this.zombieGroup);
 
-
     // Zombie Spawning
     let deltaTime = this.game.time.physicsElapsed;
     this.zombieTimer += deltaTime;
@@ -109,6 +108,12 @@ export default class Main extends Phaser.State {
       }
     }
 
+    // Check dead players
+    this.playerGroup.forEach(function(player) {
+      if (player.isDead()) {
+        player.destroy();
+      }
+    });
 
     // Disabled camera for now
     /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
