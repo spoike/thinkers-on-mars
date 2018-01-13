@@ -47,35 +47,32 @@ export default class Main extends Phaser.State {
 
     game.Zero = new Phaser.Point(0, 0);
 
-    // ...
-    this.zombie = new Zombie({
-      game: this.game,
-      x: this.game.world.centerX-100,
-      y: this.game.world.centerY-100,
-      key: 'temp_sprites',
-      frame: 'enemy',
-      players: [this.player1, this.player2]
-    });
-    
+    this.zombieSpawnTime = 10;
+    this.zombieTimer = 0;
     this.zombies = [];
     for (let i = 0; i < 10; i++) {
-      let spawn = this.getEnemySpawnPoint();
-      this.zombies.push(new Zombie({
-        game: this.game,
-        x: this.game.world.centerX+spawn.x,
-        y: this.game.world.centerY+spawn.y,
-        key: 'temp_sprites',
-        frame: 'enemy',
-        players: [this.player1, this.player2]
-      }))
+      this.spawnZombie();
     }
 
     // Setup listener for window resize.
     window.addEventListener('resize', throttle(this.resize.bind(this), 50), false);
   }
 
+  spawnZombie() {
+    let spawn = this.getEnemySpawnPoint();
+    this.zombies.push(new Zombie({
+      game: this.game,
+      x: this.game.world.centerX+spawn.x,
+      y: this.game.world.centerY+spawn.y,
+      key: 'temp_sprites',
+      frame: 'enemy',
+      players: [this.player1, this.player2]
+    }))
+  }
+
   getEnemySpawnPoint() {
-    return new Phaser.Point(Phaser.Math.random(-100, 100), Phaser.Math.random(-100, 100));
+    let degree = Phaser.Math.random(0, Math.PI*2);
+    return new Phaser.Point(Math.cos(degree) * 1000, Math.sin(degree) * 1000);
   }
 
   /**
@@ -93,6 +90,16 @@ export default class Main extends Phaser.State {
    */
   
   update() {
+    let deltaTime = this.game.time.physicsElapsed;
+    this.zombieTimer += deltaTime;
+    if (this.zombieTimer >= this.zombieSpawnTime) {
+      this.zombieTimer = 0;
+      this.zombieSpawnTime = this.zombieSpawnTime / 2.0;
+      this.spawnZombie();
+      if (this.zombieSpawnTime < 0.2) {
+        this.zombieSpawnTime = 0.2;
+      }
+    }
     // Disabled camera for now
     /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
     var centerY = (this.player1.y + this.player2.y) / 2 ;
