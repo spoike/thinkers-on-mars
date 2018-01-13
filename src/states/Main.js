@@ -1,5 +1,6 @@
 import throttle from 'lodash.throttle';
 import Player from '../objects/Player';
+import Zombie from '../objects/Zombie';
 
 const PLAYER1 = 0;
 const PLAYER2 = 1;
@@ -43,6 +44,13 @@ export default class Main extends Phaser.State {
     game.Zero = new Phaser.Point(0, 0);
 
     // ...
+    this.zombie = new Zombie({
+      game: this.game,
+      x: this.game.world.centerX-100,
+      y: this.game.world.centerY-100,
+      key: 'temp_sprites',
+      frame: 'enemy'
+    });
 
     // Setup listener for window resize.
     window.addEventListener('resize', throttle(this.resize.bind(this), 50), false);
