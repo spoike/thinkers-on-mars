@@ -20,8 +20,8 @@ export default class Main extends Phaser.State {
       game: this.game,
       x: this.game.world.centerX,
       y: this.game.world.centerY,
-      key: 'textures',
-      frame: 'ship',
+      key: 'temp_sprites',
+      frame: 'player',
     });
 
     this.cursor = this.game.input.keyboard.createCursorKeys();

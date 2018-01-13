@@ -1,6 +1,7 @@
 const AssetManifest = {
   sprites: [
     'textures.png',
+    'temp_sprites.png',
   ],
   images: [
     'bg.png',
