@@ -38,7 +38,9 @@ export default class Main extends Phaser.State {
     });
 
     this.cursor = this.game.input.keyboard.createCursorKeys();
-    this.speed = 10;
+    //this.speed = 10;
+
+    game.Zero = new Phaser.Point(0, 0);
 
     // ...
 

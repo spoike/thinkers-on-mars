@@ -1,5 +1,4 @@
 
-
 /**
  * Setup and control base player.
  */
@@ -33,22 +32,32 @@ export default class Player extends Phaser.Sprite {
 
   update() {
     this.updateInput();
+    this.updateRotation();
   }
-
 
   updateInput() {
     if (this.keys.left.isDown) {
       this.x -= this.speed;
     }
     if (this.keys.right.isDown) {
-      this.x +=  this.speed;
+      this.x += this.speed;
     }
     if (this.keys.up.isDown) {
-      this.y -=  this.speed;
+      this.y -= this.speed;
     }
     if (this.keys.down.isDown) {
       this.y += this.speed;
     } 
+  }
+
+  updateRotation() {
+    if (false) { // Is in range of one or more zombie
+
+    } else { // No zombie close
+      var velocity = new Phaser.Point(-10, 1);
+      this.rotation = Phaser.Point.angle(velocity, game.Zero);
+      
+    }
   }
 
   
