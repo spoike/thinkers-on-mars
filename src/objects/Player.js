@@ -8,7 +8,7 @@ export default class Player extends Phaser.Sprite {
     this.playerIndex = pIndex;
 
     // Constant members
-    this.speed = 250;
+    this.speed = 200;
 
     // Add the sprite to the game.
     this.game.add.existing(this);
@@ -48,7 +48,7 @@ export default class Player extends Phaser.Sprite {
     this.body.velocity.x *= 0.9;
     this.body.velocity.y *= 0.9;
 
-    var accAlpha = 0.1;
+    var accAlpha = 0.2;
 
     if (this.keys.left.isDown) {
       isMoving = true;
@@ -66,19 +66,7 @@ export default class Player extends Phaser.Sprite {
       isMoving = true;
       this.body.velocity.y = Phaser.Math.linear(this.body.velocity.y, this.speed, accAlpha);
     } 
-
-   /*  if (!isMoving) {
-      this.body.acceleration.x = 0; 
-      this.body.acceleration.y = 0;
-    }
-
-    if ( this.body.velocity.x > 2 ) {
-      this.body.velocity.x = 2
-    }
-    if ( this.body.velocity.y > 2 ) {
-      this.body.velocity.y = 2
-    } */
-
+  
   }
 
   updateRotation() {
