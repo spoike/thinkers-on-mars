@@ -1,14 +1,8 @@
 {
-  "name": "phaser-boilerplate",
+  "name": "Thinkers on Mars",
   "version": "0.0.1",
-  "author": "GoldFire Studios, Inc. (http://goldfirestudios.com)",
-  "description": "Phaser.js Game Boilerplate",
-  "contributors": [
-    {
-      "name": "James Simpson",
-      "email": "james@goldfirestudios.com"
-    }
-  ],
+  "author": "M.A.R.S.",
+  "description": "Gamejam Game",
   "private": true,
   "scripts": {
     "dev": "rimraf dist && run-s dev:**",
