@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/spoike/thinkers-on-mars/issues"
   },
-  "homepage": "https://github.com/spoike/thinkers-on-mars#readme"
+  "homepage": "https://github.com/spoike/thinkers-on-mars#readme",
+  "dependencies": {
+    "phaser": "^2.6.2"
+  }
 }
