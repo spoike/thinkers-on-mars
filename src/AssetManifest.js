@@ -2,6 +2,7 @@ const AssetManifest = {
   sprites: [
     'textures.png',
     'temp_sprites.png',
+    'player.png',
   ],
   images: [
     'bg2.png',

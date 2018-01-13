@@ -3,7 +3,6 @@
  */
 export default class Zombie extends Phaser.Sprite {
   constructor({game, x, y, key, frame, players}) {
-  	console.log(game);
     super(game, x, y, key, frame);
 
     // Add the sprite to the game.

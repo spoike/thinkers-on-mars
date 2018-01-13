@@ -28,8 +28,6 @@ export default class Main extends Phaser.State {
       pIndex: PLAYER1,
       x: this.game.world.centerX + 64,
       y: this.game.world.centerY,
-      key: 'temp_sprites',
-      frame: 'player',
     });
 
     this.player2 = new Player({
@@ -37,8 +35,6 @@ export default class Main extends Phaser.State {
       pIndex: PLAYER2,
       x: this.game.world.centerX,
       y: this.game.world.centerY,
-      key: 'temp_sprites',
-      frame: 'player',
     });
 
   
@@ -100,6 +96,9 @@ export default class Main extends Phaser.State {
         this.zombieSpawnTime = 0.2;
       }
     }
+
+    game.physics.arcade.collide(this.player1, this.player2);
+
     // Disabled camera for now
     /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
     var centerY = (this.player1.y + this.player2.y) / 2 ;
