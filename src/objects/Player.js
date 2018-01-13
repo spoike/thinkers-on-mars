@@ -23,6 +23,19 @@ export default class Player extends Phaser.Sprite {
     //this.body.allowRotation = true;
 
     this.initKeys();
+    this.initAnimations(game);
+  }
+
+  initAnimations(game) {
+    this.idleSprite = new Phaser.Sprite(game, -32.0/2, -32.0/2, 'player_idle', 0);
+    this.idleSprite.animations.add('player_idle', [
+      'player_idle 0.ase',
+      'player_idle 1.ase',
+      'player_idle 2.ase',
+      'player_idle 3.ase',
+      'player_idle 4.ase'
+    ], 10);
+    this.addChild(this.idleSprite);
   }
 
   initKeys() {
@@ -41,6 +54,7 @@ export default class Player extends Phaser.Sprite {
   update() {
     this.updateInput();
     this.updateRotation();
+    this.idleSprite.animations.play('player_idle');
   }
 
   updateInput() {
