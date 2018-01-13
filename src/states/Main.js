@@ -16,7 +16,7 @@ export default class Main extends Phaser.State {
     this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
     // Add background tile.
-    this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg');
+    this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
 
     // Add a player to the game.
     this.player1 = new Player({
@@ -33,8 +33,8 @@ export default class Main extends Phaser.State {
       pIndex: PLAYER2,
       x: this.game.world.centerX,
       y: this.game.world.centerY,
-      key: 'textures',
-      frame: 'ship',
+      key: 'temp_sprites',
+      frame: 'player',
     });
 
     this.cursor = this.game.input.keyboard.createCursorKeys();
