@@ -16,7 +16,7 @@ export default class Weapon extends Phaser.Sprite {
     this.lastVy = 0;
 
     if (type == 0) {
-      this.speed = 900;
+      this.speed = 1300;
     } else if (type == 1) {
       this.speed = 1100;
     }
@@ -53,34 +53,34 @@ export default class Weapon extends Phaser.Sprite {
   }
 
   if (this.type == 0) {
-    var bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: vx,vy: vy });
+    var bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: vx,vy: vy, scale: 1.5 });
     bullet.lifespan = 1500;
-    bullet.damage = 34;
+    bullet.damage = 40;
     game.state.callbackContext.addBullet(bullet);
-    this.shootTimer = 0.18;
+    this.shootTimer = 0.17;
   } else {
 
     var p1 = new Phaser.Point(vx, vy);
     p1 = Phaser.Point.rotate(p1, 0, 0, 15, true);
 
-    var bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: p1.x,vy:p1.y });
+    var bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: p1.x,vy:p1.y, scale: 1.2 });
     bullet.lifespan = 300;
-    bullet.damage = 25;
+    bullet.damage = 20;
     game.state.callbackContext.addBullet(bullet);
 
 
-    bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: vx,vy: vy });
+    bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: vx,vy: vy, scale: 1.2 });
     bullet.lifespan = 300;
-    bullet.damage = 25;
+    bullet.damage = 20;
     game.state.callbackContext.addBullet(bullet);
 
 
     var p3 = new Phaser.Point(vx, vy);
     p3 = Phaser.Point.rotate(p3, 0, 0, -15, true);
 
-    bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: p3.x,vy: p3.y });
+    bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: p3.x,vy: p3.y, scale: 1.2 });
     bullet.lifespan = 300;
-    bullet.damage = 25;
+    bullet.damage = 20;
     game.state.callbackContext.addBullet(bullet);
 
     this.shootTimer = 0.3;
