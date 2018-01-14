@@ -6,6 +6,11 @@ export default class Trapdoor extends Phaser.Sprite {
       this.scale.x = 2.0;
       this.scale.y = 2.0;
       this.isOpen = false;
+      this.timeUntilOpen = this.getNewTime();
+
+      this.timer = this.game.time.create(false);
+      this.timer.add(this.timeUntilOpen, this.updateDoorState, this);
+      this.timer.start();
     }
 
     initAnimations ( ) {
@@ -16,17 +21,33 @@ export default class Trapdoor extends Phaser.Sprite {
         this.animations.add('trapdoor_blink', [6, 7, 8, 9, 10, 5], 15);
 
         this.animations.frame = 0;
-        
-        const timer = this.game.time.create(false);
-        timer.loop(2000, this.updateDoorState, this);
-        timer.start();
+    }
+
+    getNewTime() {
+      return Phaser.Math.random(5, 30) * 1000;
     }
 
     updateDoorState () {
         this.isOpen = !this.isOpen;
         this.animations.play(this.isOpen ? 'trapdoor_animate' : 'trapdoor_animate_close', 10, false, false);
+
+        if (this.isOpen) {
+          this.timer.add(3000, this.updateDoorState, this);
+        } else {
+          this.timeUntilOpen = this.getNewTime();
+          this.timer.add(this.timeUntilOpen, this.updateDoorState, this);
+        }
+    }
+
+    blink() {
+      this.animations.play('trapdoor_blink', 10, false, false);
+    }
+
+    isOpen() {
+      return this.isOpen;
     }
 
     update () {
+
     }
 }
