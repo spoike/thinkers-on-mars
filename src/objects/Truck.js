@@ -12,8 +12,8 @@ export default class Truck extends Phaser.Sprite {
         this.game.physics.arcade.enable(this);
         this.enableBody = true;
         this.body.immovable = true;
-        this.body.setCircle(42);
-        this.body.offset = new Phaser.Point(35, 0);
+        this.body.setCircle(32);
+        this.body.offset = new Phaser.Point(55, 0);
 
         this.scale.x = 3.0;
         this.scale.y = 3.0;
@@ -30,7 +30,7 @@ export default class Truck extends Phaser.Sprite {
             if (this.x < -128) {
                 this.x += 5;
             }
-            if (this.stateTime > 12) {
+            if (this.stateTime > 3) {
                 this.state = TRUCK_STATE_DRIVING;
             }
         } else {

@@ -165,12 +165,12 @@ export default class Main extends Phaser.State {
       }
     }
 
-    // Check dead players
+    /* // Check dead players
     this.playerGroup.forEach(function(player) {
       if (player.isDead()) {
         player.destroy();
       }
-    });
+    }); */
 
     // Trapdoor
     let pGroup = this.playerGroup;
@@ -180,7 +180,7 @@ export default class Main extends Phaser.State {
         pGroup.forEach(function(player){
           let distance = player.position.distance(trap.position);
           if (distance <= 64) {
-            player.takeDamage(100);
+            player.damage(100);
             trap.blink();
           }
         });
@@ -194,6 +194,8 @@ export default class Main extends Phaser.State {
       }
     });
 
+    this.updateDeadEntities();
+
     // Disabled camera for now
     /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
     var centerY = (this.player1.y + this.player2.y) / 2 ;
@@ -204,6 +206,17 @@ export default class Main extends Phaser.State {
    // game.camera.scale.x = zoom;
     // game.camera.scale.y = zoom;
     
+  }
+
+  updateDeadEntities() {
+    this.playerGroup.forEach(function(player){
+      if (!player.alive)
+        player.destroy();
+    });
+    this.zombieGroup.forEach(function(zombie) {
+      if (!zombie.alive)
+        zombie.destroy();
+    });
   }
 
   onZombieBulletHit(bullet, zombie) {

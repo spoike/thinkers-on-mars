@@ -63,8 +63,9 @@ export default class Player extends Phaser.Sprite {
      this.weapon = new Weapon(game, this, 0);
   }
 
-  takeDamage(damage) {
-    this.health -= damage;
+  damage(damage) {
+    super.damage(damage);
+    //this.health -= damage;
     this.tint = 0xff0000;
   }
 

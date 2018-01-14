@@ -29,7 +29,20 @@ export default class Zombie extends Phaser.Sprite {
 	this.smoothed = false;
 }
 
+damage(damage) {
+    super.damage(damage);
+    
+    this.tint = 0xff0000;
+  }
+
   update() {
+	if (this.tint < 0xffffff) {
+		this.tint += 7000;
+	  } else {
+		this.tint = 0xffffff;
+	  }
+
+
   	let deltaTime = this.game.time.physicsElapsed;
   	if (this.doNothing > 0) {
   		this.doNothing -= deltaTime;
@@ -68,7 +81,7 @@ export default class Zombie extends Phaser.Sprite {
 		this.body.velocity.x = followVec.x * speed;
 		this.body.velocity.y = followVec.y * speed;
   	} else {
-  		follow_player.takeDamage(10);
+  		follow_player.damage(10);
 		this.doNothing = 5;
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
