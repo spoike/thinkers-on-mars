@@ -15,6 +15,7 @@ const AssetManifest = {
     google: {
       families: [
         'Open Sans:300,700',
+        'VT323',
       ],
     },
   },
