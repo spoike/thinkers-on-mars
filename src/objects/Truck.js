@@ -1,3 +1,4 @@
+import fx from 'wafxr';
 
 const TRUCK_STATE_WAIT = 0;
 const TRUCK_STATE_DRIVING = 1;
@@ -32,6 +33,9 @@ export default class Truck extends Phaser.Sprite {
             }
             if (this.stateTime > 11) {
                 this.state = TRUCK_STATE_DRIVING;
+                fx.play({
+                    "volume":-10,"attack":0.226,"decay":0.017,"sustain":0.27,"release":0.442,"sustainLevel":0.9,"frequency":206,"sweep":0.32,"jumpAt1":0.19,"jumpBy1":-0.25,"source":"pulse"
+                });
             }
         } else {
             this.body.velocity.x = 500;
