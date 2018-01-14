@@ -1,4 +1,5 @@
 import Bullet from './Bullet';
+import fx from 'wafxr';
 
 /**
  * Setup and control base weapon.
@@ -51,13 +52,15 @@ export default class Weapon extends Phaser.Sprite {
     this.lastVx = dir.x;
     this.lastVy = dir.y;
   }
-
+  fx.play({"volume":-20,"sustain":0.0827,"release":0.0833,"frequency":712.5,"sweep":-0.67});
   if (this.type == 0) {
     var bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: vx,vy: vy, scale: 1.5 });
     bullet.lifespan = 1500;
     bullet.damage = 40;
     game.state.callbackContext.addBullet(bullet);
     this.shootTimer = 0.17;
+
+    
   } else {
 
     var p1 = new Phaser.Point(vx, vy);

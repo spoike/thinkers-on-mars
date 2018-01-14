@@ -1,5 +1,5 @@
 import Weapon from "./Weapon";
-
+import fx from 'wafxr';
 
 /**
  * Setup and control base player.
@@ -84,6 +84,7 @@ export default class Player extends Phaser.Sprite {
   damage(damage) {
     super.damage(damage);
     //this.health -= damage;
+    fx.play({"volume":-10,"sustain":0.0757,"release":0.0994,"frequency":434.8,"sweep":-0.3644,"source":"sawtooth","lowpass":1704,"lowpassSweep":929.7,"compressorThreshold":-30.22});
     this.tint = 0xff0000;
   }
 

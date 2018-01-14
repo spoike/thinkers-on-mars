@@ -181,6 +181,7 @@ export default class Main extends Phaser.State {
           if (distance <= 64) {
             player.damage(100);
             trap.blink();
+            fx.play({"volume":-10,"sustain":0.076,"release":0.1405,"frequency":458.5,"sweep":-0.422,"source":"square","compressorThreshold":-32.11});
           }
         });
         zGroup.forEach(function(zombie) {
@@ -188,6 +189,7 @@ export default class Main extends Phaser.State {
           if (distance <= 64) {
             zombie.damage(100);
             trap.blink();
+            fx.play({"volume":-10,"sustain":0.0752,"release":0.1325,"frequency":579.1,"sweep":-0.4473,"source":"sawtooth","lowpass":1619,"lowpassSweep":-885.4,"compressorThreshold":-30.14});
           }
         });
       }
