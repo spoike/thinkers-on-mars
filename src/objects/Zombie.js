@@ -1,3 +1,4 @@
+import fx from 'wafxr';
 /**
  * Setup and control base player.
  */
@@ -32,6 +33,7 @@ export default class Zombie extends Phaser.Sprite {
 damage(damage) {
     super.damage(damage);
     
+    fx.play({"volume":-10,"sustain":0.0524,"release":0.1352,"source":"white noise","lowpass":1655,"lowpassSweep":623.2,"bandpass":702.8,"bandpassQ":2.112,"bandpassSweep":-309.9,"compressorThreshold":-39.21});
     this.tint = 0xff0000;
   }
 
