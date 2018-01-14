@@ -20,17 +20,19 @@ export default class UserInterface extends Phaser.Group {
     }
 
     addPlayer(player) {
-        const greenBar = this.game.add.sprite(0, 0, 'pixel');
-        const redBar = this.game.add.sprite(0, 0, 'pixel');
         const y = game.height - 38;
 
-        greenBar.tint = 0x11FF11;
-        greenBar.height = 20;
-        greenBar.y = y;
-
+        const redBar = this.game.add.sprite(0, 0, 'pixel', 0);
+        this.add(redBar);
         redBar.tint = 0xEE2222;
         redBar.height = 20;
         redBar.y = y;
+
+        const greenBar = this.game.add.sprite(0, 0, 'pixel', 0);
+        this.add(greenBar);
+        greenBar.tint = 0x11FF11;
+        greenBar.height = 20;
+        greenBar.y = y;
 
         this.players.push({
             player,
@@ -41,8 +43,8 @@ export default class UserInterface extends Phaser.Group {
 
     update() {
         const fullBarWidth = (game.width / 2) - 64
-        const p1Health = Phaser.Math.clamp(this.players[0].health, 0, 100);
-        const p2Health = Phaser.Math.clamp(this.players[1].health, 0, 100);
+        const p1Health = Phaser.Math.clamp(this.players[0].player.health, 0, 100);
+        const p2Health = Phaser.Math.clamp(this.players[1].player.health, 0, 100);
 
         const [p1, p2] = this.players;
 
@@ -58,7 +60,7 @@ export default class UserInterface extends Phaser.Group {
         p2.redBar.x = game.width - 16 - fullBarWidth;
         p2.redBar.width = fullBarWidth;
         p2.greenBar.x = game.width - 16 - p2GreenBarWidth;
-        p2.greenBar.y = p2GreenBarWidth;
+        p2.greenBar.width = p2GreenBarWidth;
         
     }
 }
