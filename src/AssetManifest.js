@@ -11,6 +11,7 @@ const AssetManifest = {
     'road.png',
     'bg2.png',
     'truck.png',
+    'mars.png',
   ],
   fonts: {
     google: {
