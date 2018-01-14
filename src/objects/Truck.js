@@ -2,6 +2,9 @@ import fx from 'wafxr';
 
 const TRUCK_STATE_WAIT = 0;
 const TRUCK_STATE_DRIVING = 1;
+const TRUCK_STATE_HONKING = 2;
+const TRUCK_SFX_SOUND = {"volume":-18,"attack":0.174,"decay":1,"sustain":1.76,"release":1,"sustainLevel":0.9,"frequency":168,"sweep":0.45,"source":"pulse","vibrato":0.3482,"vibratoFreq":8.473,"bandpass":1386,"bandpassSweep":7710};
+const TRUCK_SFX_HONK = {"volume":-18,"attack":0.05,"decay":0.154,"sustain":0.17,"release":0.213,"sustainLevel":0.3,"frequency":238,"sweep":0.2785,"jumpAt1":0.1028,"source":"pulse","pulseWidth":0.36};
 
 // Honk HONK!
 export default class Truck extends Phaser.Sprite {
@@ -32,11 +35,18 @@ export default class Truck extends Phaser.Sprite {
                 this.x += 5;
             }
             if (this.stateTime > 11) {
-                this.state = TRUCK_STATE_DRIVING;
-                fx.play({
-                    "volume":-10,"attack":0.226,"decay":0.017,"sustain":0.27,"release":0.442,"sustainLevel":0.9,"frequency":206,"sweep":0.32,"jumpAt1":0.19,"jumpBy1":-0.25,"source":"pulse"
-                });
+                this.state = TRUCK_STATE_HONKING;
+                fx.play(TRUCK_SFX_HONK);
+                setTimeout(() => {
+                    fx.play(TRUCK_SFX_HONK);
+                    setTimeout(() => {
+                        this.state = TRUCK_STATE_DRIVING;
+                        fx.play(TRUCK_SFX_SOUND);
+                    }, 500);
+                }, 250);
             }
+        } else if (this.state == TRUCK_STATE_HONKING) {
+
         } else {
             this.body.velocity.x = 500;
             if (this.position.x > this.game.world.bounds.width + 320) {
