@@ -84,7 +84,7 @@ damage(damage) {
 		this.body.velocity.y = followVec.y * speed;
   	} else {
   		follow_player.damage(10);
-		this.doNothing = 5;
+		this.doNothing = 2.5;
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;
   	}
