@@ -63,6 +63,8 @@ export default class Truck extends Phaser.Sprite {
                 this.x = -300;
                 this.stateTime = 0;
                 this.truckTime = Phaser.Math.random(10, 15);
+                audio.pause();
+                audio.currentTime = 0;
             }
         }
     }

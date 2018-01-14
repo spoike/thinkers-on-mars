@@ -190,7 +190,7 @@ export default class Main extends Phaser.State {
         });
         zGroup.forEach(function(zombie) {
           let distance = zombie.position.distance(trap.position);
-          if (distance <= 64) {
+          if (distance <= 75) {
             zombie.damage(100);
             trap.blink();
             fx.play({"volume":-10,"sustain":0.0752,"release":0.1325,"frequency":579.1,"sweep":-0.4473,"source":"sawtooth","lowpass":1619,"lowpassSweep":-885.4,"compressorThreshold":-30.14});
