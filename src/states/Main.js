@@ -2,6 +2,7 @@ import throttle from 'lodash.throttle';
 import Player from '../objects/Player';
 import Zombie from '../objects/Zombie';
 import Trapdoor from '../objects/Trapdoor';
+import Truck from '../objects/Truck';
 
 const PLAYER1 = 0;
 const PLAYER2 = 1;
@@ -32,6 +33,7 @@ export default class Main extends Phaser.State {
     this.zombieGroup = game.add.group();
     this.playerGroup = game.add.group();
     this.backgroundGroup = game.add.group();
+    this.truckGroup = game.add.group();
 
     //this.zombies = [];
     //this.bullets = [];
@@ -64,6 +66,8 @@ export default class Main extends Phaser.State {
     for (let i = 0; i < 10; i++) {
       this.spawnZombie();
     }
+
+    this.truckGroup.add(new Truck(game));
 
     // Setup listener for window resize.
     window.addEventListener('resize', throttle(this.resize.bind(this), 50), false);
@@ -200,7 +204,6 @@ export default class Main extends Phaser.State {
   }
 
   onZombieBulletHit(bullet, zombie) {
-    
     zombie.damage(bullet.damage);
     bullet.destroy();
   }

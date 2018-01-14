@@ -26,7 +26,8 @@ export default class Zombie extends Phaser.Sprite {
 
     this.scale.x = 2.0;
     this.scale.y = 2.0;
-  }
+	this.smoothed = false;
+}
 
   update() {
   	let deltaTime = this.game.time.physicsElapsed;
@@ -61,7 +62,7 @@ export default class Zombie extends Phaser.Sprite {
 
   	let followVec = new Phaser.Point(follow_player.position.x - this.position.x, follow_player.position.y - this.position.y).normalize();// Phaser.Point.subtract(follow_player.position, this.position).normalize();
 
-  	if (distance > 32) {	
+  	if (distance > 38) {	
 		var speed = 90;
 		this.body.velocity.x = followVec.x * speed;
 		this.body.velocity.y = followVec.y * speed;

@@ -6,6 +6,9 @@ export default class Bullet extends Phaser.Sprite {
     super(game, x, y, "temp_sprites", 2);
     
     this.anchor.setTo(0.5);
+    this.scale.x = 2.0;
+    this.scale.y = 2.0;
+    this.smoothed = false;
     
   this.game.physics.arcade.enable(this);
 	this.enableBody = true;
