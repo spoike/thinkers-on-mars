@@ -146,7 +146,7 @@ export default class Main extends Phaser.State {
   
   update() {
     // Collision
-    game.physics.arcade.collide(this.playerGroup);
+    //game.physics.arcade.collide(this.playerGroup);
     game.physics.arcade.collide(this.zombieGroup);
     game.physics.arcade.collide(this.zombieGroup, this.bulletGroup);
 

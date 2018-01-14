@@ -54,10 +54,10 @@ export default class Weapon extends Phaser.Sprite {
 
   if (this.type == 0) {
     var bullet = new Bullet({game: this.game,x : this.owner.x, y : this.owner.y, vx: vx,vy: vy });
-    bullet.lifespan = 1000;
+    bullet.lifespan = 1500;
     bullet.damage = 34;
     game.state.callbackContext.addBullet(bullet);
-    this.shootTimer = 0.5;
+    this.shootTimer = 0.18;
   } else {
 
 

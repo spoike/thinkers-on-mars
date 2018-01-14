@@ -3,7 +3,7 @@
  */
 export default class Bullet extends Phaser.Sprite {
   constructor({game, x, y, vx, vy}) {
-    super(game, x, y, "temp_sprites", 2);
+    super(game, x, y, "temp_sprites", "bullet");
     
     this.anchor.setTo(0.5);
     this.scale.x = 2.0;
