@@ -20,8 +20,8 @@ export default class UserInterface extends Phaser.Group {
     }
 
     update() {
-        graphics.beginFill(0xff0000);
-        graphics.drawCircle(50, 50, 100);
-        graphics.endFill();
+        //graphics.beginFill(0xff0000);
+        //graphics.drawCircle(50, 50, 100);
+        //graphics.endFill();
     }
 }
