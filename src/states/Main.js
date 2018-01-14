@@ -22,6 +22,10 @@ export default class Main extends Phaser.State {
     
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
+    // Add road
+    const road = this.game.add.tileSprite(0, this.game.world.centerY - 32, 10000, 64, 'road');
+    road.scale.x = 2.0;
+    road.scale.y = 2.0;
 
     
     this.bulletGroup = game.add.group();
