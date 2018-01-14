@@ -11,6 +11,9 @@ const AssetManifest = {
     'bg2.png',
     'truck.png',
   ],
+  audio: [
+    
+  ],
   fonts: {
     google: {
       families: [

@@ -54,13 +54,30 @@ export default class Player extends Phaser.Sprite {
         left: game.input.keyboard.addKey(Phaser.Keyboard.A),
         right: game.input.keyboard.addKey(Phaser.Keyboard.D),
       };
+      var controller = game.input.gamepad.pad1;
     } else {
       this.keys = game.input.keyboard.createCursorKeys();
+      var controller = game.input.gamepad.pad2;
     }
+
+  /*   controller.addCallbacks(this, {
+        onConnect: function() {
+            // you could use a different button here if you want...
+            //jumpButton = controller.getButton(Phaser.Gamepad.BUTTON_1);
+            this.keys = {
+              up: controller.getButton(Phaser.Gamepad.BUTTON_11),
+              down:controller.getButton(Phaser.Gamepad.BUTTON_5),
+              left: controller.getButton(Phaser.Gamepad.AXIS_0),
+              right: controller.getButton(Phaser.Gamepad.AXIS_1),
+            };
+        }
+    }); 
+    game.input.gamepad.start(); */
+
   }
 
   initWeapon() {
-     this.weapon = new Weapon(game, this, 0);
+     this.weapon = new Weapon(game, this, this.playerIndex);
   }
 
   damage(damage) {

@@ -77,11 +77,11 @@ damage(damage) {
 
   	if (distance > 38) {	
 		var speed = 60;
-		//this.body.velocity = Phaser.Math.linear(this.body.velocity, (followVec * speed), 0.1); //(followVec * speed) 
-		this.body.velocity.x += ((followVec.x * speed) - this.body.velocity.x) * 0.1;
-		this.body.velocity.y += ((followVec.y * speed) -  this.body.velocity.y) * 0.1;
-		//this.body.velocity.x = followVec.x * speed;
-		//this.body.velocity.y = followVec.y * speed;
+		
+		//this.body.velocity.x += ((followVec.x * speed) - this.body.velocity.x) * 0.1;
+		//this.body.velocity.y += ((followVec.y * speed) -  this.body.velocity.y) * 0.1;
+		this.body.velocity.x = followVec.x * speed;
+		this.body.velocity.y = followVec.y * speed;
   	} else {
   		follow_player.damage(10);
 		this.doNothing = 5;

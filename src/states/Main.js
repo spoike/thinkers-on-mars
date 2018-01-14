@@ -22,6 +22,10 @@ export default class Main extends Phaser.State {
     this.scale.setGameSize(1280, 720);
     //game.world.setBounds(-100, -100);
     
+    //var music = this.game.add.audio('music', 1, true);
+    //music.loop = true;
+    //music.play();
+    
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
     // Add road
@@ -46,7 +50,7 @@ export default class Main extends Phaser.State {
     this.player1 = new Player({
       game: this.game,
       pIndex: PLAYER1,
-      x: this.game.world.centerX + 64,
+      x: this.game.world.centerX,
       y: this.game.world.centerY,
     });
     this.playerGroup.add(this.player1);
@@ -54,7 +58,7 @@ export default class Main extends Phaser.State {
     this.player2 = new Player({
       game: this.game,
       pIndex: PLAYER2,
-      x: this.game.world.centerX,
+      x: this.game.world.centerX + 72,
       y: this.game.world.centerY,
     });
 
@@ -62,6 +66,7 @@ export default class Main extends Phaser.State {
 
     game.Zero = new Phaser.Point(0, 0);
 
+    this.truckGroup.add(new Truck(game));
  
     this.zombieSpawnTime = 10;
     this.zombieTimer = 0;
