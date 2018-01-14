@@ -56,6 +56,7 @@ export default class Player extends Phaser.Sprite {
       };
       var controller = game.input.gamepad.pad1;
     } else {
+      this.scale.x = -2.0;
       this.keys = game.input.keyboard.createCursorKeys();
       var controller = game.input.gamepad.pad2;
     }

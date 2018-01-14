@@ -12,7 +12,7 @@ export default class Weapon extends Phaser.Sprite {
     this.type = type;
     this.shootTimer = 0;
 
-    this.lastVx = 1;
+    this.lastVx = (type * 2) - 1;
     this.lastVy = 0;
 
     if (type == 0) {
@@ -44,9 +44,9 @@ export default class Weapon extends Phaser.Sprite {
   var vx = dir.x * this.speed;
   var vy = dir.y * this.speed;
 
-  if (vx == 0 && vy == 0) {
-    vx = this.lastVx;
-    vy = this.lastVy;
+  if (dir.x == 0 && dir.y == 0) {
+    vx = this.lastVx * this.speed;
+    vy = this.lastVy * this.speed;
   } else {
     this.lastVx = dir.x;
     this.lastVy = dir.y;

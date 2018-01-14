@@ -4,6 +4,7 @@ import Zombie from '../objects/Zombie';
 import Trapdoor from '../objects/Trapdoor';
 import Truck from '../objects/Truck';
 import UserInterface from '../objects/UserInterface';
+import fx from 'wafxr';
 
 const PLAYER1 = 0;
 const PLAYER2 = 1;
@@ -22,6 +23,7 @@ export default class Main extends Phaser.State {
     this.scale.setGameSize(1280, 720);
     //game.world.setBounds(-100, -100);
     
+    fx.play({"volume":-10,"attack":0.148,"release":0.338,"frequency":681,"source":"pulse","pulseWidth":0.62});
     //var music = this.game.add.audio('music', 1, true);
     //music.loop = true;
     //music.play();
