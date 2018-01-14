@@ -31,7 +31,7 @@ export default class Trapdoor extends Phaser.Sprite {
     }
 
     getNewTime() {
-      return Phaser.Math.random(5, 30) * 1000;
+      return Phaser.Math.random(5, 15) * 1000;
     }
 
     updateDoorState () {
@@ -39,7 +39,7 @@ export default class Trapdoor extends Phaser.Sprite {
         this.animations.play(this.isOpen ? 'trapdoor_animate' : 'trapdoor_animate_close', 10, false, false);
 
         if (this.isOpen) {
-          this.timer.add(3000, this.updateDoorState, this);
+          this.timer.add(Phaser.Math.random(3000, 6000), this.updateDoorState, this);
         } else {
           this.timeUntilOpen = this.getNewTime();
           this.timer.add(this.timeUntilOpen, this.updateDoorState, this);

@@ -84,23 +84,13 @@ export default class Main extends Phaser.State {
     this.trapdoorGroup = this.game.add.group();
     this.trapdoorGroup.add(new Trapdoor({
       game: this.game, 
-      x: 150,
-      y: 150
+      x: 1280/2,
+      y: 230
     }));
     this.trapdoorGroup.add(new Trapdoor({
       game: this.game, 
-      x: 1000,
-      y: 140
-    }));
-    this.trapdoorGroup.add(new Trapdoor({
-      game: this.game, 
-      x: 1050,
-      y: 600
-    }));
-    this.trapdoorGroup.add(new Trapdoor({
-      game: this.game, 
-      x: 140,
-      y: 600
+      x: 1280/2,
+      y: 550
     }));
   }
 
