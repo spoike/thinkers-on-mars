@@ -11,6 +11,7 @@ export default class Player extends Phaser.Sprite {
     this.facing = 'front';
     this.scale.x = 2.0;
     this.scale.y = 2.0;
+    this.smoothed = false;
 
     // Constant members
     this.speed = 190;

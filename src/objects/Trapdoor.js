@@ -5,6 +5,7 @@ export default class Trapdoor extends Phaser.Sprite {
       this.initAnimations();
       this.scale.x = 2.0;
       this.scale.y = 2.0;
+      this.smoothed = false;
       this.isOpen = false;
       this.timeUntilOpen = this.getNewTime();
 
