@@ -16,6 +16,14 @@ export default class UserInterface extends Phaser.Group {
         });
         this.add(p2Text);
 
+        this.timer = 0;
+        this.timeText = game.add.text(game.width/ 2, 24, '0', {
+            font: 'normal 48px VT323',
+            fill: 'white',
+            align: 'center',
+          });
+          this.add(this.timeText);
+
         this.players = [];
     }
 
@@ -42,6 +50,9 @@ export default class UserInterface extends Phaser.Group {
     }
 
     update() {
+        this.timer += this.game.time.physicsElapsed;
+        this.timeText.text = Math.round(Number(this.timer));
+
         const fullBarWidth = (game.width / 2) - 64
         const p1Health = Phaser.Math.clamp(this.players[0].player.health, 0, 100);
         const p2Health = Phaser.Math.clamp(this.players[1].player.health, 0, 100);
