@@ -54,27 +54,18 @@ export default class Player extends Phaser.Sprite {
         left: game.input.keyboard.addKey(Phaser.Keyboard.A),
         right: game.input.keyboard.addKey(Phaser.Keyboard.D),
       };
-      var controller = game.input.gamepad.pad1;
+      this.gamepad = game.input.gamepad.pad1;
     } else {
       this.scale.x = -2.0;
       this.keys = game.input.keyboard.createCursorKeys();
-      var controller = game.input.gamepad.pad2;
+      this.gamepad = game.input.gamepad.pad2;
     }
-
-  /*   controller.addCallbacks(this, {
-        onConnect: function() {
-            // you could use a different button here if you want...
-            //jumpButton = controller.getButton(Phaser.Gamepad.BUTTON_1);
-            this.keys = {
-              up: controller.getButton(Phaser.Gamepad.BUTTON_11),
-              down:controller.getButton(Phaser.Gamepad.BUTTON_5),
-              left: controller.getButton(Phaser.Gamepad.AXIS_0),
-              right: controller.getButton(Phaser.Gamepad.AXIS_1),
-            };
-        }
-    }); 
-    game.input.gamepad.start(); */
-
+    this.game.input.gamepad.start();
+    this.axes = {x: 0, y: 0};
+    this.gamepad.onAxisCallback = (args) => {
+      this.axes.x = this.gamepad._axes[0];
+      this.axes.y = this.gamepad._axes[1];
+    }
   }
 
   initWeapon() {
@@ -114,22 +105,22 @@ export default class Player extends Phaser.Sprite {
 
     var accAlpha = 0.75;
 
-    if (this.keys.left.isDown) {
+    if (this.keys.left.isDown || this.axes.x < 0) {
       this.isMoving = true;
       this.body.velocity.x = Phaser.Math.linear(this.body.velocity.x, -this.speed, accAlpha);
       this.scale.x = 2.0;
     }
-    if (this.keys.right.isDown) {
+    if (this.keys.right.isDown || this.axes.x > 0) {
       this.isMoving = true;
       this.body.velocity.x = Phaser.Math.linear(this.body.velocity.x, this.speed, accAlpha);
       this.scale.x = -2.0;
     }
-    if (this.keys.up.isDown) {
+    if (this.keys.up.isDown || this.axes.y < 0) {
       this.isMoving = true;
       this.body.velocity.y= Phaser.Math.linear(this.body.velocity.y, -this.speed, accAlpha);
       this.facing = 'back';
     }
-    if (this.keys.down.isDown) {
+    if (this.keys.down.isDown || this.axes.y > 0) {
       this.isMoving = true;
       this.body.velocity.y = Phaser.Math.linear(this.body.velocity.y, this.speed, accAlpha);
       this.facing = 'front';
