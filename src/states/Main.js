@@ -230,6 +230,9 @@ export default class Main extends Phaser.State {
   }
 
   onTruckHit(truck, entity) {
+    if (truck.state == 0)
+      return;
+      
     entity.body.velocity.y = Phaser.Math.random(-300, 300);
     entity.damage(1.2);
   }

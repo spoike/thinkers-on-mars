@@ -22,6 +22,7 @@ export default class Truck extends Phaser.Sprite {
 
         this.state = TRUCK_STATE_WAIT;
         this.stateTime = 0;
+        this.truckTime = Phaser.Math.random(10, 15);
     }
 
     update() {
@@ -31,7 +32,7 @@ export default class Truck extends Phaser.Sprite {
             if (this.x < -128) {
                 this.x += 5;
             }
-            if (this.stateTime > 11) {
+            if (this.stateTime > this.truckTime) {
                 this.state = TRUCK_STATE_DRIVING;
                 fx.play({
                     "volume":-10,"attack":0.226,"decay":0.017,"sustain":0.27,"release":0.442,"sustainLevel":0.9,"frequency":206,"sweep":0.32,"jumpAt1":0.19,"jumpBy1":-0.25,"source":"pulse"
@@ -44,6 +45,7 @@ export default class Truck extends Phaser.Sprite {
                 this.body.velocity.x = 0;
                 this.x = -300;
                 this.stateTime = 0;
+                this.truckTime = Phaser.Math.random(10, 15);
             }
         }
     }
