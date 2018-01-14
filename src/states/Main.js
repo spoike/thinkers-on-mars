@@ -150,6 +150,9 @@ export default class Main extends Phaser.State {
     game.physics.arcade.collide(this.zombieGroup);
     game.physics.arcade.collide(this.zombieGroup, this.bulletGroup);
 
+    game.physics.arcade.collide(this.truckGroup, this.zombieGroup, this.onTruckHit);
+    game.physics.arcade.collide(this.truckGroup, this.playerGroup, this.onTruckHit);
+
     // Zombie Spawning
     let deltaTime = this.game.time.physicsElapsed;
     this.zombieTimer += deltaTime;
@@ -198,5 +201,10 @@ export default class Main extends Phaser.State {
   onZombieBulletHit(bullet, zombie) {
     zombie.damage(bullet.damage);
     bullet.destroy();
+  }
+
+  onTruckHit(truck, entity) {
+    entity.body.velocity.y = Phaser.Math.random(-300, 300);
+    entity.damage(1.2);
   }
 }

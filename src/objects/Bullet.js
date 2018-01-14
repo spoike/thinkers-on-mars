@@ -11,11 +11,11 @@ export default class Bullet extends Phaser.Sprite {
 	this.enableBody = true;
   this.body.immovable = true;
 
+  this.scale.x = 1.3;
+  this.scale.y = 1.3;
+
   this.body.velocity.x = vx;
   this.body.velocity.y = vy;
   }
-
-  // TODO remove after X sec
-
 
 }
