@@ -28,7 +28,7 @@ export default class Main extends Phaser.State {
     road.scale.x = 2.0;
     road.scale.y = 2.0;
 
-    
+    this.initTrapdoors();
     this.bulletGroup = game.add.group();
     this.zombieGroup = game.add.group();
     this.playerGroup = game.add.group();
@@ -38,7 +38,7 @@ export default class Main extends Phaser.State {
     //this.zombies = [];
     //this.bullets = [];
 
-    this.initTrapdoors();
+    
    
     // Add a player to the game.
     this.player1 = new Player({
@@ -77,23 +77,23 @@ export default class Main extends Phaser.State {
     this.trapdoorGroup = this.game.add.group();
     this.trapdoorGroup.add(new Trapdoor({
       game: this.game, 
-      x: 70,
-      y: 100
+      x: 150,
+      y: 150
     }));
     this.trapdoorGroup.add(new Trapdoor({
       game: this.game, 
       x: 1000,
-      y: 90
+      y: 140
     }));
     this.trapdoorGroup.add(new Trapdoor({
       game: this.game, 
       x: 1050,
-      y: 500
+      y: 600
     }));
     this.trapdoorGroup.add(new Trapdoor({
       game: this.game, 
-      x: 70,
-      y: 500
+      x: 140,
+      y: 600
     }));
   }
 
@@ -172,14 +172,23 @@ export default class Main extends Phaser.State {
       }
     });
 
-    // Check trapdoors
+    // Trapdoor
     let pGroup = this.playerGroup;
-    this.trapdoorGroup.forEach(function (trapdoor){
-      if (trapdoor.isOpen) {
-        pGroup.forEach(function(player) {
-          if(player.overlap(trapdoor)) {
+    let zGroup = this.zombieGroup;
+    this.trapdoorGroup.forEach(function (trap){
+      if (trap.isOpen) {
+        pGroup.forEach(function(player){
+          let distance = player.position.distance(trap.position);
+          if (distance <= 64) {
             player.takeDamage(100);
-            trapdoor.blink();
+            trap.blink();
+          }
+        });
+        zGroup.forEach(function(zombie) {
+          let distance = zombie.position.distance(trap.position);
+          if (distance <= 64) {
+            zombie.damage(100);
+            trap.blink();
           }
         });
       }
@@ -196,7 +205,6 @@ export default class Main extends Phaser.State {
     // game.camera.scale.y = zoom;
     
   }
-
 
   onZombieBulletHit(bullet, zombie) {
     zombie.damage(bullet.damage);

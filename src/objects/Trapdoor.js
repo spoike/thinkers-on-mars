@@ -5,8 +5,15 @@ export default class Trapdoor extends Phaser.Sprite {
       this.initAnimations();
       this.scale.x = 2.0;
       this.scale.y = 2.0;
+      
+      this.anchor.setTo(0.5);
+      this.smoothed = false;
       this.isOpen = false;
       this.timeUntilOpen = this.getNewTime();
+
+      this.game.physics.arcade.enable(this);
+      this.enableBody = true;
+      this.body.static = true;
 
       this.timer = this.game.time.create(false);
       this.timer.add(this.timeUntilOpen, this.updateDoorState, this);
