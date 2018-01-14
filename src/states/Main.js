@@ -21,8 +21,14 @@ export default class Main extends Phaser.State {
     
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
-
+    
+    this.bulletGroup = game.add.group();
+    this.zombieGroup = game.add.group();
     this.playerGroup = game.add.group();
+
+    this.zombies = [];
+    this.bullets = [];
+
     // Add a player to the game.
     this.player1 = new Player({
       game: this.game,
@@ -43,11 +49,9 @@ export default class Main extends Phaser.State {
 
     game.Zero = new Phaser.Point(0, 0);
 
-    this.zombieGroup = game.add.group();
-
+ 
     this.zombieSpawnTime = 10;
     this.zombieTimer = 0;
-    this.zombies = [];
     for (let i = 0; i < 10; i++) {
       this.spawnZombie();
     }
@@ -57,6 +61,9 @@ export default class Main extends Phaser.State {
   }
 
   spawnZombie() {
+    if (this.zombies.length > 30)
+      return;
+
     let spawn = this.getEnemySpawnPoint();
     var zombie = new Zombie({
       game: this.game,
@@ -73,6 +80,14 @@ export default class Main extends Phaser.State {
   getEnemySpawnPoint() {
     let degree = Phaser.Math.random(0, Math.PI*2);
     return new Phaser.Point(Math.cos(degree) * 1000, Math.sin(degree) * 1000);
+  }
+
+  addBullet(bullet) {
+    // Add the sprite to the game.
+    this.game.add.existing(bullet);
+
+    this.bullets.push(bullet);
+    this.bulletGroup.add(bullet);
   }
 
   /**

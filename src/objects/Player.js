@@ -1,3 +1,5 @@
+import Weapon from "./Weapon";
+
 
 /**
  * Setup and control base player.
@@ -11,10 +13,10 @@ export default class Player extends Phaser.Sprite {
     this.scale.y = 2.0;
 
     // Constant members
-    this.speed = 230;
+    this.speed = 190;
 
     // Add the sprite to the game.
-    this.game.add.existing(this);
+    //this.game.add.existing(this);
     this.anchor.setTo(0.5);
     
     // Physics body
@@ -27,6 +29,7 @@ export default class Player extends Phaser.Sprite {
 
     this.initKeys();
     this.initAnimations(game);
+    this.initWeapon();
   }
 
   initAnimations(game) {
@@ -49,25 +52,20 @@ export default class Player extends Phaser.Sprite {
     }
   }
 
+  initWeapon() {
+     this.weapon = new Weapon(game, this, 0);
+  }
+
   update() {
     this.updateInput();
     this.updateRotation();
-    switch (this.facing) {
-      case 'back':
-        if (this.isMoving) {
-          this.animations.play('run_back');
-        } else {
-          this.animations.play('idle_back');
-        }
-        break;
-      case 'front':
-      default:
-      if (this.isMoving) {
-        this.animations.play('run_front');
-      } else {
-        this.animations.play('idle_front');
-      }
-      break;
+    this.updateShooting();
+   
+  }
+
+  updateShooting() {
+    if (this.weapon != null) {
+      this.weapon.shoot();
     }
   }
 
@@ -101,12 +99,30 @@ export default class Player extends Phaser.Sprite {
   }
 
   updateRotation() {
-    if (false) { // Is in range of one or more zombie
+    switch (this.facing) {
+      case 'back':
+        if (this.isMoving) {
+          this.animations.play('run_back');
+        } else {
+          this.animations.play('idle_back');
+        }
+        break;
+      case 'front':
+      default:
+      if (this.isMoving) {
+        this.animations.play('run_front');
+      } else {
+        this.animations.play('idle_front');
+      }
+      break;
+    }
+
+    /* if (false) { // Is in range of one or more zombie
 
     } else { // No zombie close
       var velocity = this.body.velocity; //new Phaser.Point(-10, 1);
       //const rotation = Phaser.Point.angle(velocity, game.Zero);
-    }
+    } */
   }
 
   
