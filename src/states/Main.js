@@ -22,10 +22,22 @@ export default class Main extends Phaser.State {
     
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
+    // Add road
+    const road = this.game.add.tileSprite(0, this.game.world.centerY - 32, 10000, 64, 'road');
+    road.scale.x = 2.0;
+    road.scale.y = 2.0;
+
+    
+    this.bulletGroup = game.add.group();
+    this.zombieGroup = game.add.group();
+    this.playerGroup = game.add.group();
+    this.backgroundGroup = game.add.group();
+
+    this.zombies = [];
+    this.bullets = [];
 
     this.initTrapdoors();
-
-    this.playerGroup = this.game.add.group();
+   
     // Add a player to the game.
     this.player1 = new Player({
       game: this.game,
@@ -46,11 +58,9 @@ export default class Main extends Phaser.State {
 
     game.Zero = new Phaser.Point(0, 0);
 
-    this.zombieGroup = game.add.group();
-
+ 
     this.zombieSpawnTime = 10;
     this.zombieTimer = 0;
-    this.zombies = [];
     for (let i = 0; i < 10; i++) {
       this.spawnZombie();
     }
@@ -84,6 +94,9 @@ export default class Main extends Phaser.State {
   }
 
   spawnZombie() {
+    if (this.zombies.length > 30)
+      return;
+
     let spawn = this.getEnemySpawnPoint();
     var zombie = new Zombie({
       game: this.game,
@@ -102,6 +115,14 @@ export default class Main extends Phaser.State {
     return new Phaser.Point(Math.cos(degree) * 1000, Math.sin(degree) * 1000);
   }
 
+  addBullet(bullet) {
+    // Add the sprite to the game.
+    this.game.add.existing(bullet);
+
+    this.bullets.push(bullet);
+    this.bulletGroup.add(bullet);
+  }
+
   /**
    * Resize the game to fit the window.
    */
@@ -118,10 +139,9 @@ export default class Main extends Phaser.State {
   
   update() {
     // Collision
-    //game.physics.arcade.collide(this.player1, this.player2);
     game.physics.arcade.collide(this.playerGroup);
-    //game.physics.arcade.collide(this.zombieGroup,  this.playerGroup);
     game.physics.arcade.collide(this.zombieGroup);
+    game.physics.arcade.collide(this.zombieGroup, this.bulletGroup);
 
     // Zombie Spawning
     let deltaTime = this.game.time.physicsElapsed;

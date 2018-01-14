@@ -7,7 +7,11 @@ export default class Prop extends Phaser.Sprite {
 
     // Add the sprite to the game.
     this.game.add.existing(this);
-    this.anchor.setTo(0.5);
+	this.anchor.setTo(0.5);
+	
+	this.game.physics.arcade.enable(this);
+	this.enableBody = true;
+	this.body.immovable = true;
 
   }
 

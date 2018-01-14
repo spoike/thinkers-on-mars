@@ -7,6 +7,7 @@ const AssetManifest = {
     'trapdoor.png',
   ],
   images: [
+    'road.png',
     'bg2.png',
   ],
   fonts: {
