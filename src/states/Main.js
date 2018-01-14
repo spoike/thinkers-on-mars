@@ -239,7 +239,7 @@ export default class Main extends Phaser.State {
 
     entity.body.velocity.y = Phaser.Math.random(-300, 300);
 
-    var dmg = entity instanceof Zombie ? 3 : 1.1;
+    var dmg = entity instanceof Zombie ? 2.1 : 1.1;
     entity.damage(dmg);
   }
 }
