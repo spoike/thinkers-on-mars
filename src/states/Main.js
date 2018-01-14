@@ -39,7 +39,7 @@ export default class Main extends Phaser.State {
     this.playerGroup = game.add.group();
     this.backgroundGroup = game.add.group();
     this.truckGroup = game.add.group();
-    new UserInterface(game);
+    const ui = new UserInterface(game);
 
     //this.zombies = [];
     //this.bullets = [];
@@ -54,6 +54,7 @@ export default class Main extends Phaser.State {
       y: this.game.world.centerY,
     });
     this.playerGroup.add(this.player1);
+    ui.addPlayer(this.player1);
 
     this.player2 = new Player({
       game: this.game,
@@ -61,6 +62,7 @@ export default class Main extends Phaser.State {
       x: this.game.world.centerX + 72,
       y: this.game.world.centerY,
     });
+    ui.addPlayer(this.player2);
 
     this.playerGroup.add(this.player2);
 
