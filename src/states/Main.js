@@ -29,8 +29,8 @@ export default class Main extends Phaser.State {
     this.playerGroup = game.add.group();
     this.backgroundGroup = game.add.group();
 
-    this.zombies = [];
-    this.bullets = [];
+    //this.zombies = [];
+    //this.bullets = [];
 
     this.trapdoor = new Trapdoor({
       game: this.game, 
@@ -72,7 +72,7 @@ export default class Main extends Phaser.State {
   }
 
   spawnZombie() {
-    if (this.zombies.length > 30)
+    if (this.zombieGroup.length > 30)
       return;
 
     let spawn = this.getEnemySpawnPoint();
@@ -84,7 +84,7 @@ export default class Main extends Phaser.State {
       frame: 'enemy',
       players: [this.player1, this.player2]
     });
-    this.zombies.push(zombie);
+    //this.zombies.push(zombie);
     this.zombieGroup.add(zombie);
   }
 
@@ -95,9 +95,12 @@ export default class Main extends Phaser.State {
 
   addBullet(bullet) {
     // Add the sprite to the game.
-    this.game.add.existing(bullet);
+    //this.game.add.existing(bullet);
 
-    this.bullets.push(bullet);
+    bullet.body.onCollide = new Phaser.Signal();
+    bullet.body.onCollide.add(this.onZombieBulletHit, this);
+
+    //this.bullets.push(bullet);
     this.bulletGroup.add(bullet);
   }
 
@@ -150,5 +153,12 @@ export default class Main extends Phaser.State {
    // game.camera.scale.x = zoom;
     // game.camera.scale.y = zoom;
     
+  }
+
+
+  onZombieBulletHit(bullet, zombie) {
+    
+    zombie.damage(bullet.damage);
+    bullet.destroy();
   }
 }

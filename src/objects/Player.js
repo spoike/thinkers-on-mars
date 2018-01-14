@@ -63,7 +63,8 @@ export default class Player extends Phaser.Sprite {
   }
 
   takeDamage(damage) {
-  	this.health -= damage;
+    this.health -= damage;
+    this.tint = 0xff0000;
   }
 
   update() {
