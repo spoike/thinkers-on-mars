@@ -214,6 +214,10 @@ export default class Main extends Phaser.State {
       if (!zombie.alive)
         zombie.destroy();
     });
+
+    if (!this.player1.alive && !this.player2.alive) {
+      game.state.start('GameOver');
+    }
   }
 
   onZombieBulletHit(bullet, zombie) {
