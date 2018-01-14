@@ -72,6 +72,11 @@ export default class Player extends Phaser.Sprite {
     this.updateRotation();
     this.updateShooting();
    
+    if (this.tint < 0xffffff) {
+      this.tint += 5000;
+    } else {
+      this.tint = 0xffffff;
+    }
   }
 
   updateShooting() {

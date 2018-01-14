@@ -192,7 +192,6 @@ export default class Main extends Phaser.State {
 
 
   onZombieBulletHit(bullet, zombie) {
-    
     zombie.damage(bullet.damage);
     bullet.destroy();
   }
