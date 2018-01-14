@@ -27,12 +27,18 @@ export default class Player extends Phaser.Sprite {
     //this.body.immovable = true;
     //this.body.allowRotation = true;
 
+    this.health = 100;
+
     this.initKeys();
-    this.initAnimations(game);
     this.initWeapon();
+    this.initAnimations();
   }
 
-  initAnimations(game) {
+  isDead() {
+  	return this.health <= 0;
+  }
+
+  initAnimations() {
     this.animations.add('idle_front', [0, 1, 2, 3, 4], 15);
     this.animations.add('idle_back', [5, 6, 7, 8], 15);
     this.animations.add('run_front', [9, 10, 11], 15);
@@ -54,6 +60,10 @@ export default class Player extends Phaser.Sprite {
 
   initWeapon() {
      this.weapon = new Weapon(game, this, 0);
+  }
+
+  takeDamage(damage) {
+  	this.health -= damage;
   }
 
   update() {

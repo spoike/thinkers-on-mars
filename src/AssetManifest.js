@@ -3,6 +3,8 @@ const AssetManifest = {
     'textures.png',
     'temp_sprites.png',
     'player.png',
+    'zombie.png',
+    'trapdoor.png',
   ],
   images: [
     'bg2.png',

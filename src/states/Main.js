@@ -1,6 +1,7 @@
 import throttle from 'lodash.throttle';
 import Player from '../objects/Player';
 import Zombie from '../objects/Zombie';
+import Trapdoor from '../objects/Trapdoor';
 
 const PLAYER1 = 0;
 const PLAYER2 = 1;
@@ -21,14 +22,24 @@ export default class Main extends Phaser.State {
     
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
+
     
     this.bulletGroup = game.add.group();
     this.zombieGroup = game.add.group();
     this.playerGroup = game.add.group();
+    this.backgroundGroup = game.add.group();
 
     this.zombies = [];
     this.bullets = [];
 
+    this.trapdoor = new Trapdoor({
+      game: this.game, 
+      x: this.game.world.centerX, 
+      y: this.game.world.centerY
+    });
+    this.backgroundGroup.add(this.trapdoor);
+
+   
     // Add a player to the game.
     this.player1 = new Player({
       game: this.game,
@@ -106,11 +117,9 @@ export default class Main extends Phaser.State {
   
   update() {
     // Collision
-    //game.physics.arcade.collide(this.player1, this.player2);
     game.physics.arcade.collide(this.playerGroup);
-    //game.physics.arcade.collide(this.zombieGroup,  this.playerGroup);
     game.physics.arcade.collide(this.zombieGroup);
-
+    game.physics.arcade.collide(this.zombieGroup, this.bulletGroup);
 
     // Zombie Spawning
     let deltaTime = this.game.time.physicsElapsed;
@@ -124,6 +133,12 @@ export default class Main extends Phaser.State {
       }
     }
 
+    // Check dead players
+    this.playerGroup.forEach(function(player) {
+      if (player.isDead()) {
+        player.destroy();
+      }
+    });
 
     // Disabled camera for now
     /*   var centerX = (this.player1.x + this.player2.x) / 2 - game.camera.bounds.x;
