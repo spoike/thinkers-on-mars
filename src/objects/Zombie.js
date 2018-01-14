@@ -36,7 +36,8 @@ damage(damage) {
 	this.tint = 0xff0000;
 	
 	if (damage > 5)
-    	fx.play({"volume":-10,"sustain":0.0524,"release":0.1352,"source":"white noise","lowpass":1655,"lowpassSweep":623.2,"bandpass":702.8,"bandpassQ":2.112,"bandpassSweep":-309.9,"compressorThreshold":-39.21});
+		//fx.play({"volume":-10,"sustain":0.0524,"release":0.1352,"source":"white noise","lowpass":1655,"lowpassSweep":623.2,"bandpass":702.8,"bandpassQ":2.112,"bandpassSweep":-309.9,"compressorThreshold":-39.21});
+		fx.play({"volume":-15,"sustain":0.0559,"release":0.0635,"source":"white noise","bandpass":836.9,"bandpassQ":3.72,"bandpassSweep":-262.4,"compressorThreshold":-35.85});
   }
 
   update() {
@@ -87,7 +88,7 @@ damage(damage) {
 		this.body.velocity.x = followVec.x * speed;
 		this.body.velocity.y = followVec.y * speed;
   	} else {
-  		follow_player.damage(10);
+  		follow_player.damage(game.zombieDamage);
 		this.doNothing = 2.5;
 		this.body.velocity.x = 0;
 		this.body.velocity.y = 0;

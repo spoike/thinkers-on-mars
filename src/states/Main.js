@@ -72,6 +72,7 @@ export default class Main extends Phaser.State {
 
     this.truckGroup.add(new Truck(game));
  
+    game.zombieDamage = 10;
     this.zombieSpawnTime = 10;
     this.zombieTimer = 0;
     for (let i = 0; i < 10; i++) {
@@ -154,6 +155,9 @@ export default class Main extends Phaser.State {
 
     // Zombie Spawning
     let deltaTime = this.game.time.physicsElapsed;
+
+    game.zombieDamage += deltaTime * 0.25;
+
     this.zombieTimer += deltaTime;
     if (this.zombieTimer >= this.zombieSpawnTime) {
       this.zombieTimer = 0;
@@ -232,7 +236,7 @@ export default class Main extends Phaser.State {
   onTruckHit(truck, entity) {
     if (truck.state == 0)
       return;
-      
+
     entity.body.velocity.y = Phaser.Math.random(-300, 300);
     entity.damage(1.2);
   }

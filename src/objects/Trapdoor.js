@@ -1,3 +1,5 @@
+import fx from 'wafxr';
+
 export default class Trapdoor extends Phaser.Sprite {
     constructor({game, x, y}) {
       super(game, x, y, "trapdoor", 0);
@@ -39,6 +41,7 @@ export default class Trapdoor extends Phaser.Sprite {
         this.animations.play(this.isOpen ? 'trapdoor_animate' : 'trapdoor_animate_close', 10, false, false);
 
         if (this.isOpen) {
+          fx.play({"volume":-10,"attack":0.482,"decay":0.292,"sustain":0.0543,"release":0.0922,"source":"white noise","lowpass":2005,"lowpassSweep":-1192,"bandpass":535.9,"bandpassQ":3.705,"bandpassSweep":-131,"compressorThreshold":-37.17});
           this.timer.add(Phaser.Math.random(5000, 10000), this.updateDoorState, this);
         } else {
           this.timeUntilOpen = this.getNewTime();
