@@ -3,6 +3,10 @@ import AssetManifest from '../AssetManifest';
 
 import fx from 'wafxr';
 
+const audio = new Audio('/assets/music.mp3');
+audio.loop = true;
+audio.volume = 0.005;
+
 /**
  * Preload the game and display the loading screen.
  */
@@ -31,7 +35,6 @@ export default class Preload extends Phaser.State {
       .then(() => {
         this.game.state.start('Main');
 
-        let audio = new Audio('/assets/music.mp3');
         audio.play();
       });
   }

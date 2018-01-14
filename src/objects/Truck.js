@@ -8,6 +8,8 @@ const TRUCK_SFX_HONK = {"volume":-18,"attack":0.05,"decay":0.154,"sustain":0.17,
 
 let audio = new Audio('/assets/lordi.mp3');
 audio.pause();
+audio.loop = false;
+audio.volume = 1.0;
 
 // Honk HONK!
 export default class Truck extends Phaser.Sprite {
