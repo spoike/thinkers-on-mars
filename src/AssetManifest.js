@@ -5,6 +5,7 @@ const AssetManifest = {
     'player.png',
     'zombie.png',
     'trapdoor.png',
+    'pixel.png',
   ],
   images: [
     'road.png',

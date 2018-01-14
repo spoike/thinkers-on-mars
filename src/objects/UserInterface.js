@@ -16,13 +16,27 @@ export default class UserInterface extends Phaser.Group {
         });
         this.add(p2Text);
 
-        this.healthBarGfx = game.add.graphics();
-
         this.players = [];
     }
 
     addPlayer(player) {
-        this.players.push(player);
+        const greenBar = this.game.add.sprite(0, 0, 'pixel');
+        const redBar = this.game.add.sprite(0, 0, 'pixel');
+        const y = game.height - 38;
+
+        greenBar.tint = 0x11FF11;
+        greenBar.height = 20;
+        greenBar.y = y;
+
+        redBar.tint = 0xEE2222;
+        redBar.height = 20;
+        redBar.y = y;
+
+        this.players.push({
+            player,
+            greenBar,
+            redBar,
+        });
     }
 
     update() {
@@ -30,21 +44,21 @@ export default class UserInterface extends Phaser.Group {
         const p1Health = Phaser.Math.clamp(this.players[0].health, 0, 100);
         const p2Health = Phaser.Math.clamp(this.players[1].health, 0, 100);
 
-        // player 1
-        this.healthBarGfx.beginFill(0xEE2222);
-        this.healthBarGfx.drawRect(16, game.height - 32, fullBarWidth, 32);
-        this.healthBarGfx.beginFill(0x11ff11);
+        const [p1, p2] = this.players;
+
         const p1GreenBarWidth = fullBarWidth * (p1Health / 100);
         const p1GreenBarPos = fullBarWidth * (1 - (p1Health / 100));
-        this.healthBarGfx.drawRect(16 + p1GreenBarPos, game.height - 32, p1GreenBarWidth, 32);
-        // player 2
-        this.healthBarGfx.beginFill(0xEE2222);
-        this.healthBarGfx.drawRect(game.width - 16 - fullBarWidth, game.height - 32, fullBarWidth, 32);
-        this.healthBarGfx.beginFill(0x11ff11);
+        p1.redBar.x = 16;
+        p1.redBar.width = fullBarWidth;
+        p1.greenBar.x = 16 + p1GreenBarPos;
+        p1.greenBar.width = p1GreenBarWidth;
+
         const p2GreenBarWidth = fullBarWidth * (p2Health / 100);
         const p2GreenBarPos = fullBarWidth * (1 - (p2Health / 100));
-        this.healthBarGfx.drawRect(game.width - 16 - p2GreenBarWidth, game.height - 32, p2GreenBarWidth, 32);
-
-        this.healthBarGfx.endFill();
+        p2.redBar.x = game.width - 16 - fullBarWidth;
+        p2.redBar.width = fullBarWidth;
+        p2.greenBar.x = game.width - 16 - p2GreenBarWidth;
+        p2.greenBar.y = p2GreenBarWidth;
+        
     }
 }
