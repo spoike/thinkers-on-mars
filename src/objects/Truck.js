@@ -43,10 +43,10 @@ export default class Truck extends Phaser.Sprite {
 
             if (this.stateTime > this.truckTime) {
                 this.state = TRUCK_STATE_HONKING;
+                audio.play();
                 fx.play(TRUCK_SFX_HONK);
                 setTimeout(() => {
                     fx.play(TRUCK_SFX_HONK);
-                    audio.play();
                     setTimeout(() => {
                         this.state = TRUCK_STATE_DRIVING;
                         fx.play(TRUCK_SFX_SOUND);
