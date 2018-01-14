@@ -30,7 +30,7 @@ export default class Truck extends Phaser.Sprite {
             if (this.x < -128) {
                 this.x += 5;
             }
-            if (this.stateTime > 3) {
+            if (this.stateTime > 11) {
                 this.state = TRUCK_STATE_DRIVING;
             }
         } else {

@@ -16,9 +16,9 @@ export default class Weapon extends Phaser.Sprite {
     this.lastVy = 0;
 
     if (type == 0) {
-      this.speed = 800;
+      this.speed = 900;
     } else if (type == 1) {
-      this.speed = 1200;
+      this.speed = 1300;
     }
   }
 

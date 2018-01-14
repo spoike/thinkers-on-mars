@@ -76,7 +76,7 @@ damage(damage) {
   	let followVec = new Phaser.Point(follow_player.position.x - this.position.x, follow_player.position.y - this.position.y).normalize();// Phaser.Point.subtract(follow_player.position, this.position).normalize();
 
   	if (distance > 38) {	
-		var speed = 90;
+		var speed = 60;
 		//this.body.velocity = Phaser.Math.linear(this.body.velocity, (followVec * speed), 0.1); //(followVec * speed) 
 		this.body.velocity.x = followVec.x * speed;
 		this.body.velocity.y = followVec.y * speed;
