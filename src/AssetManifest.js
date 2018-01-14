@@ -12,9 +12,6 @@ const AssetManifest = {
     'bg2.png',
     'truck.png',
   ],
-  audio: [
-    
-  ],
   fonts: {
     google: {
       families: [
@@ -23,6 +20,8 @@ const AssetManifest = {
       ],
     },
   },
+  audio: [
+  ],
 };
 
 export default AssetManifest;

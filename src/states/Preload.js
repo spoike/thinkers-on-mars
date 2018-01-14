@@ -30,9 +30,9 @@ export default class Preload extends Phaser.State {
       .load()
       .then(() => {
         this.game.state.start('Main');
-        fx.play({
-          "volume": -10, "sustain": 0.1412, "release": 0.4533, "source": "white noise", "tremolo": 0.1773, "tremoloFreq": 32.01, "bandpass": 2988, "bandpassQ": 0.6386, "bandpassSweep": -1900, "compressorThreshold": -31.44
-        });
+
+        let audio = new Audio('/assets/music.mp3');
+        audio.play();
       });
   }
 

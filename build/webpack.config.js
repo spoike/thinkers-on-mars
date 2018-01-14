@@ -75,6 +75,10 @@ const config = {
           use: 'css-loader!postcss-loader',
         }),
       },
+      {
+        test: /\.mp3$/,
+        use: 'file-loader?name=assets/[name].[ext]',
+      }
     ],
   },
   plugins: [
