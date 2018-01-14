@@ -23,13 +23,7 @@ export default class Main extends Phaser.State {
     // Add background tile.
     this.game.add.tileSprite(-5000, -5000, 10000, 10000, 'bg2');
 
-    this.backgroundGroup = this.game.add.group();
-    this.trapdoor = new Trapdoor({
-      game: this.game, 
-      x: this.game.world.centerX, 
-      y: this.game.world.centerY
-    });
-    this.backgroundGroup.add(this.trapdoor);
+    this.initTrapdoors();
 
     this.playerGroup = this.game.add.group();
     // Add a player to the game.
@@ -63,6 +57,30 @@ export default class Main extends Phaser.State {
 
     // Setup listener for window resize.
     window.addEventListener('resize', throttle(this.resize.bind(this), 50), false);
+  }
+
+  initTrapdoors() {
+    this.trapdoorGroup = this.game.add.group();
+    this.trapdoorGroup.add(new Trapdoor({
+      game: this.game, 
+      x: 70,
+      y: 100
+    }));
+    this.trapdoorGroup.add(new Trapdoor({
+      game: this.game, 
+      x: 1000,
+      y: 90
+    }));
+    this.trapdoorGroup.add(new Trapdoor({
+      game: this.game, 
+      x: 1050,
+      y: 500
+    }));
+    this.trapdoorGroup.add(new Trapdoor({
+      game: this.game, 
+      x: 70,
+      y: 500
+    }));
   }
 
   spawnZombie() {
@@ -121,6 +139,19 @@ export default class Main extends Phaser.State {
     this.playerGroup.forEach(function(player) {
       if (player.isDead()) {
         player.destroy();
+      }
+    });
+
+    // Check trapdoors
+    let pGroup = this.playerGroup;
+    this.trapdoorGroup.forEach(function (trapdoor){
+      if (trapdoor.isOpen) {
+        pGroup.forEach(function(player) {
+          if(player.overlap(trapdoor)) {
+            player.takeDamage(100);
+            trapdoor.blink();
+          }
+        });
       }
     });
 
